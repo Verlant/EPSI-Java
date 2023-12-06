@@ -1,0 +1,37 @@
+package Manipulation;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class StreamExercise {
+    public static void main(String[] args) {
+        List<Integer> nombres = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        int sum = nombres.stream()
+                .filter(nombre -> nombre % 2 == 0)
+                .mapToInt(nombre -> nombre * 2)
+                .skip(3)
+                .limit(5)
+                .sum();
+
+        System.out.println(sum);
+
+        sum = nombres.stream()
+                .filter(nombre -> nombre % 2 == 0)
+                .map(nombre -> nombre * 2)
+                .skip(3)
+                .limit(5)
+                .reduce(0, Integer::sum);
+
+        System.out.println(sum);
+
+        sum = nombres.stream()
+                .filter(nombre -> nombre % 2 == 0)
+                .map(nombre -> nombre * 2)
+                .skip(3)
+                .limit(5)
+                .reduce(0, (n, a) -> Integer.sum(n, a));
+
+        System.out.println(sum);
+    }
+}
